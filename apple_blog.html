@@ -1,0 +1,15 @@
+---
+layout: blog
+category: apple
+---
+
+<h1>Apple Blog</h1>
+
+<ul>
+  {% for blog in site.categories.apple %}
+  <li>
+    <a href="{{site.baseurl}}{{blog.url}}">{{ blog.title }}</a>
+    <p>{{ blog.meta }}</p>
+  </li>
+  {% endfor %}
+</ul>

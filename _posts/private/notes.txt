@@ -1,0 +1,3 @@
+Why does not this thing show up on the indexmenu plugin?
+
+I would like to test it with this page.

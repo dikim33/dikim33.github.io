@@ -1,0 +1,6 @@
+#server: true
+#auto: true
+gems:
+  - jekyll-avatar
+exclude: ['README.md']
+#permalink: pretty

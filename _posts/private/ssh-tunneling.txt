@@ -1,0 +1,44 @@
+==== SSH Tunnelling ====
+
+We'll move right out of beginner stuff into ssh tunnelling now. The idea here is to connect to a remote computer via an intermediate computer, all with ssh. This situation arises at organizations that have one computer facing the internet, but you want to connect to another computer behind the internet-facing computer. Of course the intermediate computer and the remote computer must accept ssh connections. I'll assume that you are "dude" sitting at "localhost", with account "intdude" on the intermediate computer "intermediate.edu", and account "remotedude" on the remote computer "remote.edu". I'll assume further that you have set up ssh keys for access to intermediate.edu.
+
+=== Basic SSH Tunnelling ===
+
+On localhost, in a terminal, run
+
+ $ ssh -L 2022:remote.edu:22 intdude@intermediate.edu 
+This creates an "ssh tunnel" starting at localhost:2022 through intermediate.edu (which has the default ssh port of 22) to remote.edu:22. As a byproduct it gives you a shell on intermediate.edu. The idea is that you can use ssh to connect to remote.edu from localhost through the tunnel.\\
+\\
+Leave this terminal open, and in another terminal run
+<code> $ ssh -l remotedude -p 2022 localhost</code>
+If you do not have your id_dsa.pub key in remote.edu's .ssh/authorized_keys, then you will get:
+<code> remotedude@localhost's password:</code>
+Enter the remotedude password at this prompt and you will have a shell on remote.edu. Of course if you have set up ssh keys for connecting from intermediate.edu to remote.edu, then you will need no passwords at all.\\
+\\
+You can use the same key pair for both ssh connections, but maybe you don't want to; for example you may want to use one private/public pair for your computers at work and another pair for your computers at home. In this case the work computer only needs the public ida_dsa.pub key from your home pair.\\
+\\
+Remark: It is not quite intuitive to use "localhost" in your commands and mean "remote.edu". You can change this so that "ssh remotedude@remote.edu" works by adding a HostKeyAlias to your config file, as described below.
+
+=== CVS Tunnel to remote.edu ===
+
+Credit: I learned about this at http://www.informatik.hu-berlin.de/~vitt/doc/ssh/.
+
+Assume you want to check out the module mycvsmodule on remote.edu which has CVS root "/cvsroot". Create with or add to your localhost ~/.ssh/config file the following stanza (note the optional wildcard "*", too):
+<code>
+      Host remote*
+      HostName localhost
+      Port 2022
+      User remotedude
+      HostKeyAlias remote
+      CheckHostIP no
+      ForwardAgent yes
+</code>
+Then (after you set up the tunnel in another terminal with the "ssh -L" command as described above) run something like
+<code> $ cvs -d:ext:remote.edu:/cvsroot co mycvsmodule</code>
+which will check out the "mycvsmodule" module. You can now cd into the mycvsmodule/ directory where CVS commands will work as expected (as long as the tunnel is open).
+
+=== Browser Tunnel to remote.edu ===
+
+Tunnelling may help in situations where you want to access web pages from a site behind a firewall. If remote.edu is running a web server then it can be accessed via ssh through intermediate.edu. Suppose there is a page which you can access from inside the firewall at http://remote.edu/mypage.html. Assuming you have set up ssh as described above, from outside the firewall you can set up a tunnel:
+<code> $ ssh -L 2022:remote.edu:80 intdude@intermediate.edu</code>
+and then browse to http://localhost:2022/mypage.html. 

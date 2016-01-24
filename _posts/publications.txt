@@ -1,0 +1,11 @@
+==== Publications ====
+
+  * [[http://www.osl.iu.edu/publications/Author/KIM-DI.php|My Publications]]
+
+<note>
+I will try to synchronize the contents of my Publication pages in the OSL web site.
+</note>
+
+
+==== Presentations ====
+  * [[http://www.osl.iu.edu/~dikim/OSCAR.ppt|OSCAR overview]]

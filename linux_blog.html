@@ -1,0 +1,15 @@
+---
+layout: blog
+category: linux
+---
+
+<h1>Linux Blog</h1>
+
+<ul>
+  {% for blog in site.categories.linux %}
+  <li>
+    <a href="{{site.baseurl}}{{blog.url}}">{{ blog.title }}</a>
+    <p>{{ blog.meta }}</p>
+  </li>
+  {% endfor %}
+</ul>
