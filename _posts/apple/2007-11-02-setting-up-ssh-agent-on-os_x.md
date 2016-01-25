@@ -1,7 +1,7 @@
 ---
 layout: blog-article
 title: Setting up ssh-agent on OS X
-meta: Using a passwordless ssh access without any passphrases could be a danagerour security hole. If you really care about this, you may want to setup your ssh key with a certain passphrase. The troublesome of using the ssh key with the passphrase is you have to type in the passphrase everytime you use the ssh key (e.g., when you login to the remote machine with the ssh access). Setting up the ssh-agent would be a good solution to avoid this trouble.
+meta: Using a passwordless ssh access without any passphrases could be a dangerous security hole. If you really care about this, you may want to setup your ssh key with a certain passphrase. The troublesome of using the ssh key with the passphrase is you have to type in the passphrase everytime you use the ssh key (e.g., when you login to the remote machine with the ssh access). Setting up the ssh-agent would be a good solution to avoid this trouble.
 source:
 category: apple
 folder: apple

@@ -42,6 +42,16 @@
 }
 
 
+#footer table{
+  border:0;
+  width: 700px;
+}
+
+#footer td{
+  vertical-align: top;
+  border:0;
+}
+
 table{
   border-collapse: collapse;
   border-spacing: 0;
