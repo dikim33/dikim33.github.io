@@ -3,5 +3,6 @@
 
 {% include css/common.css %}
 {% include css/masthead.css %}
-{% include css/nav.css %}
+{% include css/header.css %}
+{% include css/footer.css %}
 {% include css/github.css %}
