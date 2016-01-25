@@ -20,7 +20,8 @@ pmset -g batt
 hdiutil makehybrid -iso -o /path/to/make/your/iso/file.iso /directory/of/the/source/dmg/files/
 {% endhighlight %}
 
-  * **chflags** change file flags: I usually use this to unlock files with uchg, nodump, some other flags.
+  * **chflags** change file flags: I usually use this to lock/unlock files with uchg/nouchg and do something else with some other flags (e.g., nodump, ...).   
+      The option, nouchg clears the user immutable flag.
 {% highlight bash %}
 sudo find . -flags uchg -exec chflags nouchg {} \;
   or
