@@ -21,5 +21,5 @@ If you prefer to use "tar" to backup your data to CD-R, here is another trick.
 {% highlight bash %}
 tar -czf - /data | cdrecord -v -eject -fs=4M speed=8 dev=0,0,0 -
 {% endhighlight %}
-This won't be mountable as a normal CD, and you won't be able to put it in a Windows system, but it works fine on Linux.
+This won't be mountable as a normal CD and you won't be able to put it in a Windows system, but it works fine on Linux.
 
