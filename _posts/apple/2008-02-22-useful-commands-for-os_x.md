@@ -43,3 +43,10 @@ usage:  fsaclctl -p path | -a  [-e enable] [-d disable] [-v]
 {% highlight bash %}
 system_profiler SPHardwareDataType SPNetworkDataType
 {% endhighlight %}
+
+  * **xattr** setup the special attribute of files.
+      Under special circumstances, Mac OS X adds the extended attribute 'com.apple.quarantine' to a file which was e.g. downloaded from the internet. This can also happen to files within the BoxCryptor Folder. If an encrypted file has this extended attribute set, you receive the "is damaged" error message when trying to open the plaintext file in the BoxCryptor Volume.
+{% highlight bash %}
+xattr -r -d com.apple.quarantine /path/to/encfs/mount/point
+{% endhighlight %}
+
