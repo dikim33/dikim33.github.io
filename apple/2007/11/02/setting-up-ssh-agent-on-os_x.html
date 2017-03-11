@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <!--
+    <link rel="stylesheet" type="text/css" href="/stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/github-dark.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/print.css" media="print">
+    -->
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?">
+    <link rel="stylesheet" type="text/css" href="/css/main.css" media="screen">
+
+    <title>DongInn's Notes</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div id="header">
+        <div id="header-title">
+          <h1>DongInn's Notes</h1>
+          <h2>./configure</h2>
+                  <ul class="blue">
+            <li><a href="/" title="home" class="" ><span>Home</span></a></li>
+            <li><a href="/configure" title="configure" class="" ><span>Configure</span></a></li>
+            <li><a href="/blog" title="blog" class="current" ><span>Blog</span></a></li>
+            <!--
+            <li><a href="/contact" title="contact" class="" ><span>Contact</span></a></li>
+            -->
+            <li><a href="/publications" title="contact" class="" ><span>Publications</span></a></li>
+        </ul>
+
+
+        </div>
+        <div id="header-img">
+          <!--<img class="avatar" src="https://avatars1.githubusercontent.com/dikim33?v=3&s=180" alt="dikim33" width="180" height="180" />-->
+          <img src="/images/Avatar.png" width="180">
+        </div>
+
+        <!--
+        <section id="downloads">
+          <a href="https://github.com/dikim33" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+        -->
+      </div>
+    </header>
+    <div class="container">
+      <section id="main_content">
+
+<div id="second-header">
+  <ul class="blue">
+    <li><a href="/apple_blog" title="apple" class="current" ><span>Apple</span></a></li>
+    <li><a href="/linux_blog" title="linux" class="" ><span>Linux</span></a></li>
+  </ul>
+</div>
+
+<h1>Setting up ssh-agent on OS X</h1>
+
+<p>It is very important to make the environment variable <strong>SSH_AUTH_SOCK</strong> available all the time in order to set up successfully ssh-agent on your OS X.
+The way to save the <strong>SSH_AUTH_SOCK</strong> variable is simple. Just create the following directory and file on your $HOME.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd</span> <span class="nv">$HOME</span>
+mkdir .MacOSX
+<span class="nb">cd</span> .MacOSX</code></pre></figure>
+
+<p>And then create a file <strong>environment.plist</strong> in it</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="o">[</span>15:02] halfrunt:~/.MacOSX % cat environment.plist 
+&lt;?xml <span class="nv">version</span><span class="o">=</span><span class="s2">"1.0"</span> <span class="nv">encoding</span><span class="o">=</span><span class="s2">"UTF-8"</span>?&gt;
+&lt;!DOCTYPE plist PUBLIC <span class="s2">"-//Apple Computer//DTD PLIST 1.0//EN"</span> <span class="s2">"http://www.apple.com/DTDs/PropertyList-1.0.dtd"</span>&gt;
+&lt;plist <span class="nv">version</span><span class="o">=</span><span class="s2">"1.0"</span>&gt;
+&lt;dict&gt;
+        &lt;key&gt;SSH_AUTH_SOCK&lt;/key&gt;
+        &lt;string&gt;/tmp/dikim_ssh-agent.socket&lt;/string&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;</code></pre></figure>
+
+<p>After that, follow up with the normal ssh-agent configuration on linux.
+  - if <strong>SSH_AUTH_SOCK</strong> is not defined, setup the value with my specific null file(e.g., /tmp/dikim_ssh-agent.socket)
+  - Otherewise, just use the value of <strong>SSH_AUTH_SOCK</strong>
+  - check to see if ssh-agent process is running
+  - if not, start it like this</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">ssh-agent -a /tmp/dikim_ssh-agent.socket</code></pre></figure>
+
+<ul>
+  <li>And then add your ssh private key to your running ssh-agent (e.g., ssh-add ${HOME}/.ssh/id_dsa mostly)</li>
+</ul>
+
+<p>I wrote a simple shell script to run all the boring processes and then put the script to my customized shell configuration(e.g., .tcshrc, .cshrc, or .bashrc) to make my ssh-agent configuration always work whenever I login.<br />
+Here is my shell script to configure my ssh_agent.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#!/bin/sh</span>
+<span class="c">#</span>
+<span class="c"># Check that the ssh-agent is running, and if not, kick it off</span>
+<span class="c">#</span>
+
+<span class="c"># default TTL = 8 hours</span>
+<span class="nv">TTL</span><span class="o">=</span>28800
+
+<span class="k">if</span> <span class="o">[[</span> -z <span class="nv">$SSH_AUTH_SOCK</span> <span class="o">]]</span>; <span class="k">then
+   </span><span class="nv">SOCKETFILE</span><span class="o">=</span>/tmp/dikim_ssh-agent.socket
+<span class="k">else
+   </span><span class="nv">SOCKETFILE</span><span class="o">=</span><span class="k">${</span><span class="nv">SSH_AUTH_SOCK</span><span class="k">}</span>
+<span class="k">fi</span>
+
+/bin/ps -wU <span class="k">${</span><span class="nv">USER</span><span class="k">}</span> | grep <span class="s2">"[s]sh-agent"</span> &gt; /dev/null
+<span class="k">if</span> <span class="o">[[</span> <span class="nv">$?</span> -gt 0 <span class="o">]]</span>; <span class="k">then
+   </span>rm -f <span class="k">${</span><span class="nv">SOCKETFILE</span><span class="k">}</span>
+   ssh-agent -a <span class="k">${</span><span class="nv">SOCKETFILE</span><span class="k">}</span>
+   chmod 600 <span class="k">${</span><span class="nv">SOCKETFILE</span><span class="k">}</span>
+   ssh-add <span class="k">${</span><span class="nv">HOME</span><span class="k">}</span>/.ssh/id_dsa
+<span class="k">fi</span></code></pre></figure>
+
+
+
+
+
+      </section>
+      <footer>
+        <div id="footer">
+        <table>
+          <tr>
+            <td><span style="display: block !important; width: 300px; text-align: left; font-family: sans-serif; font-size: 12px;"><a href="http://www.wunderground.com/cgi-bin/findweather/getForecast?query=zmw:47401.1.99999&bannertypeclick=wu_clean2day" title="Bloomington, Indiana Weather Forecast" target="_blank"><img src="http://weathersticker.wunderground.com/weathersticker/cgi-bin/banner/ban/wxBanner?bannertype=wu_clean2day_cond&airportcode=KBMG&ForcedCity=Bloomington&ForcedState=IN&zip=47401&language=EN" alt="Find more about Weather in Bloomington, IN" width="200" /></a><br><a href="http://www.wunderground.com/cgi-bin/findweather/getForecast?query=zmw:47401.1.99999&bannertypeclick=wu_clean2day" title="Get latest Weather Forecast updates" style="font-family: sans-serif; font-size: 12px" target="_blank">Click for weather forecast</a></span></td>
+            <td style="text-align:right">Today: 2017-03-11</td>
+          </tr>
+        </table>
+      </div>
+      </footer>
+    </div>
+  </body>
+</html>

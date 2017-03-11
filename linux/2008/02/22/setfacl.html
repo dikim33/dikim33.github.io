@@ -24,9 +24,9 @@
           <h1>DongInn's Notes</h1>
           <h2>./configure</h2>
                   <ul class="blue">
-            <li><a href="/" title="home" class="current" ><span>Home</span></a></li>
+            <li><a href="/" title="home" class="" ><span>Home</span></a></li>
             <li><a href="/configure" title="configure" class="" ><span>Configure</span></a></li>
-            <li><a href="/blog" title="blog" class="" ><span>Blog</span></a></li>
+            <li><a href="/blog" title="blog" class="current" ><span>Blog</span></a></li>
             <!--
             <li><a href="/contact" title="contact" class="" ><span>Contact</span></a></li>
             -->
@@ -50,42 +50,21 @@
     <div class="container">
       <section id="main_content">
 
-<h1>Welcome to DongInn's Notes.</h1>
+<div id="second-header">
+  <ul class="blue">
+    <li><a href="/apple_blog" title="apple" class="" ><span>Apple</span></a></li>
+    <li><a href="/linux_blog" title="linux" class="current" ><span>Linux</span></a></li>
+  </ul>
+</div>
 
-<p>I am working for the Center for Research in Extreme Scale Technologies (<a
-    href="http://www.crest.iu.edu/">CREST</a>) as a System Administrator at the
-  <a href="http://www.cs.indiana.edu/">Computer Science Department</a> of <a
-  href="http://www.iub.edu/">Indiana University-Bloomington</a> and also
-working on the Open Source
-Cluster Application Resources (<a
-href="http://oscar.openclustergroup.org/">OSCAR</a>) and Coordinated Infrastructure for Fault Tolerant Systems (<a
-href="http://www.mcs.anl.gov/research/cifts/">CIFTS</a>) project as a core
-developer. My research interests include software engineering and clustering
-computing. Several years ago I worked with PS3 to <a href="/linux/2008/04/29/install_oscar_on_ps3">install OSCAR on several PS3
-  machines</a>.</p>
+<h1>setfacl</h1>
 
-<p>This website consists of my personal blog and notes that I want to keep
-  somewhere for the future. The blog and note pages will be to talk about
-OSCAR, linux, Apple, sysadmin, and anything fun.</p> 
+<p>Before I forget, I would like to keep it here.</p>
 
-<b>Contact</b>
-<ul>
-  <li>Tel : 812-856-1369</li>
-  <li>Email : dikim @ indiana . edu</li>
-  <li>Office : C228 (sometimes, LH 135)</li>
-  <li><a href="http://www.crest.iu.edu/~dikim/dikim_public_key.asc">PGP Public key</a> ( <a href="http://pgp.mit.edu:11371/pks/lookup?search=dikim%40indiana.edu&op=vindex&fingerprint=on">for my full pubic key index on the PGP server</a> )</li>
-  <li>IRC channel: #oscar-cluster, #sisuite, #389, #bcfg2, and #perceus on irc.freenode.net</li>
-</ul>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">setfacl -Rm group:SOME_GROUP_NAME:r-x /foo</code></pre></figure>
 
-<pre>
-(list->string                                                     
-   (map integer->char                                                
-      (map (lambda (n) (+ (* (remainder n 16) 16) (quotient n 16)))
-         '(68 246 230 118 148 230 230 2 180 150                  
-           214 2 195 70 150 182 150 214 4 150                    
-           230 70 150 22 230 22 226 86 70 87 227))))')))
-</pre>
-If you would like to know how to get the above magic numbers, try <a href="http://www.crest.iu.edu/~dikim/hint.html">this</a>. 
+
+
 
 
       </section>

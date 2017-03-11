@@ -24,9 +24,9 @@
           <h1>DongInn's Notes</h1>
           <h2>./configure</h2>
                   <ul class="blue">
-            <li><a href="/" title="home" class="current" ><span>Home</span></a></li>
+            <li><a href="/" title="home" class="" ><span>Home</span></a></li>
             <li><a href="/configure" title="configure" class="" ><span>Configure</span></a></li>
-            <li><a href="/blog" title="blog" class="" ><span>Blog</span></a></li>
+            <li><a href="/blog" title="blog" class="current" ><span>Blog</span></a></li>
             <!--
             <li><a href="/contact" title="contact" class="" ><span>Contact</span></a></li>
             -->
@@ -50,42 +50,80 @@
     <div class="container">
       <section id="main_content">
 
-<h1>Welcome to DongInn's Notes.</h1>
+<div id="second-header">
+  <ul class="blue">
+    <li><a href="/apple_blog" title="apple" class="" ><span>Apple</span></a></li>
+    <li><a href="/linux_blog" title="linux" class="current" ><span>Linux</span></a></li>
+  </ul>
+</div>
 
-<p>I am working for the Center for Research in Extreme Scale Technologies (<a
-    href="http://www.crest.iu.edu/">CREST</a>) as a System Administrator at the
-  <a href="http://www.cs.indiana.edu/">Computer Science Department</a> of <a
-  href="http://www.iub.edu/">Indiana University-Bloomington</a> and also
-working on the Open Source
-Cluster Application Resources (<a
-href="http://oscar.openclustergroup.org/">OSCAR</a>) and Coordinated Infrastructure for Fault Tolerant Systems (<a
-href="http://www.mcs.anl.gov/research/cifts/">CIFTS</a>) project as a core
-developer. My research interests include software engineering and clustering
-computing. Several years ago I worked with PS3 to <a href="/linux/2008/04/29/install_oscar_on_ps3">install OSCAR on several PS3
-  machines</a>.</p>
+<h1>Install OSCAR on PlayStation3</h1>
 
-<p>This website consists of my personal blog and notes that I want to keep
-  somewhere for the future. The blog and note pages will be to talk about
-OSCAR, linux, Apple, sysadmin, and anything fun.</p> 
-
-<b>Contact</b>
+<p><img src="/images/linux/oscar_on_ps3.png" alt="OSCAR on PS3" /></p>
+<h3> Requirements </h3>
 <ul>
-  <li>Tel : 812-856-1369</li>
-  <li>Email : dikim @ indiana . edu</li>
-  <li>Office : C228 (sometimes, LH 135)</li>
-  <li><a href="http://www.crest.iu.edu/~dikim/dikim_public_key.asc">PGP Public key</a> ( <a href="http://pgp.mit.edu:11371/pks/lookup?search=dikim%40indiana.edu&op=vindex&fingerprint=on">for my full pubic key index on the PGP server</a> )</li>
-  <li>IRC channel: #oscar-cluster, #sisuite, #389, #bcfg2, and #perceus on irc.freenode.net</li>
+  <li>OSCAR 5.1</li>
+  <li>2 x PS3 machines or more</li>
+  <li>USB key</li>
+  <li>OtherOS Installer</li>
+  <li>HDMI-DVI connector</li>
+  <li>YellowDogLinux(YDL)5.0 (PPC) DVD</li>
+  <li>USB Keyboard and USB mouse</li>
+  <li>Network</li>
 </ul>
 
-<pre>
-(list->string                                                     
-   (map integer->char                                                
-      (map (lambda (n) (+ (* (remainder n 16) 16) (quotient n 16)))
-         '(68 246 230 118 148 230 230 2 180 150                  
-           214 2 195 70 150 182 150 214 4 150                    
-           230 70 150 22 230 22 226 86 70 87 227))))')))
-</pre>
-If you would like to know how to get the above magic numbers, try <a href="http://www.crest.iu.edu/~dikim/hint.html">this</a>. 
+<h3> Install </h3>
+<p><strong> Step 1. Install YDL5.0 on PS3 </strong></p>
+
+<ul>
+  <li>Download the OtherOS installer specially built for OSCAR</li>
+  <li>Save it to the USB key (FAT format) and then hook it up to the PS3</li>
+  <li>Power on PS3 on the game mode
+    <ul>
+      <li>Settings Menu -&gt; System Settings -&gt; A partition setting for hard disk: custom
+        <ul>
+          <li>60GB = 10GB(Game) + 50GB(Linux)</li>
+        </ul>
+      </li>
+      <li>Settings Menu -&gt; System Settings -&gt; Install Other OS
+        <ul>
+          <li>Click on OK to start the installation</li>
+        </ul>
+      </li>
+      <li>Settings -&gt; System Settings -&gt; Default System and select “Other OS”</li>
+    </ul>
+  </li>
+  <li>Insert YDL5.0 DVD</li>
+  <li>Restart PS3 to boot with Other OS</li>
+  <li>Type in “install” at the kboot prompt</li>
+  <li>Do the YDL5.0 installation</li>
+</ul>
+
+<p><strong> Step 2. Install OSCAR </strong></p>
+
+<ul>
+  <li>Once YDL5.0 is fully installed and up, download OSCAR 5.1</li>
+  <li>Follow the ordinary OSCAR installation instruction
+    <ul>
+      <li>After oscarimage is created at the oscar installation Step 4, there is one thing to modify the image manually. Just remove the systemconfig.conf file at the oscarimage built</li>
+      <li>At the OSCAR installation step 6. “Setup Networking…”, prepare PS3 client nodes to boot up with OtherOS like we did it on the head node PS3 at the above Step 1.</li>
+    </ul>
+  </li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">        chroot /var/lib/systemimager/images/oscarimage
+        <span class="nb">cd</span> /etc/systemconfig
+        mv systemconfig.conf systemconfig.conf.bak
+       </code></pre></figure>
+
+<ul>
+  <li>Finish up the OSCAR installation</li>
+</ul>
+
+<p>For the updated instruction, please refer to the <a href="http://svn.oscar.openclustergroup.org/trac/oscar/wiki/OSCAR_on_PS3">wiki page</a> that I wrote on the OSCAR web site.</p>
+
+
+
 
 
       </section>

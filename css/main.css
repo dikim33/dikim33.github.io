@@ -1,8 +1,258 @@
----
----
+html {
+  margin: 0;
+  padding: 0;
 
-{% include css/common.css %}
-{% include css/masthead.css %}
-{% include css/header.css %}
-{% include css/footer.css %}
-{% include css/github.css %}
+  font: normal 100%/1.4 Georgia,serif;
+
+  min-height:100%;/* make sure it is at least as tall as the viewport */
+  position:relative;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#feffff+0,ddf1f9+35,a0d8ef+100;Blue+3D+%2318 */
+  background: #feffff; /* Old browsers */
+  background: -moz-linear-gradient(top,  #feffff 0%, #ddf1f9 35%, #a0d8ef 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  #feffff 0%,#ddf1f9 35%,#a0d8ef 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  #feffff 0%,#ddf1f9 35%,#a0d8ef 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', endColorstr='#a0d8ef',GradientType=0  ); /* IE6-9 */
+
+}
+
+.container {
+  width: 90%;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+a:link {
+  text-decoration: none;
+  color: #2989d8;
+}
+
+a:visited {
+  color: #7d7e7d;
+}
+
+.masthead{
+  padding: 1em;
+
+  background: #000531;
+  background-size: cover;
+  color: #fff;
+}
+
+.masthead-planets {
+  background-image: url("../images/")
+}
+
+
+/* Nav */
+.current {
+  background-color: #000531;
+  color: #fff;
+}
+
+.nav {
+  margin: 0;
+  padding: 0;
+
+  list-style-type: none;
+}
+
+.nav > li {
+  display: inline-block;
+}
+
+.nav-top {
+  font-size: 1.25em;
+}
+
+/* Header */
+#header {
+  width: 700px;
+  margin: 0 auto;
+  border-bottom: 1px solid #e7e7e7;
+}
+
+#header-title {
+  width: 520px;
+  float: left;
+  margin: 0 auto;
+}
+
+#header-img{
+  width: 180px;
+  margin-left: 520px;
+}
+
+#header ul {
+  padding: 5px;
+  margin: 10px 0;
+  list-style: none;
+  float: left;
+  clear: left;
+  width: 100%;
+}
+
+#header ul li {
+  float: left;
+  display: inline; /*For ignore double margin in IE6*/
+  margin: 0 10px;
+}
+
+#header ul li a {
+  text-decoration: none;
+  float:left;
+  color: #999;
+  cursor: pointer;
+  font: 900 14px/22px "Arial", Helvetica, sans-serif;
+}
+
+#header ul li a span {
+  margin: 0 10px 0 -10px;
+  padding: 1px 8px 5px 18px;
+  position: relative; /*To fix IE6 problem (not displaying)*/
+  float:left;
+}
+
+
+/*BLUE*/
+#header ul.blue li a.current, ul.blue li a:hover {
+  background: url("../images/blue.png") no-repeat top right;
+  color: #0d5f83;
+}
+
+#header ul.blue li a.current span, ul.blue li a:hover span {
+  background: url("../images/blue.png") no-repeat top left;
+}
+
+#second-header {
+  width: 700px;
+  margin: 0 auto;
+}
+
+#second-header ul li a span {
+  margin: 0 10px 0 -10px;
+  padding: 1px 8px 5px 18px;
+  position: relative; /*To fix IE6 problem (not displaying)*/
+  float:left;
+}
+
+#second-header ul {
+  padding: 5px;
+  margin: -10px 0 25px;
+  list-style: none;
+  float: left;
+  clear: left;
+  width: 100%;
+}
+
+#second-header ul li {
+  float: left;
+  display: inline; /*For ignore double margin in IE6*/
+  margin: 0 10px;
+}
+
+#second-header ul li a {
+  text-decoration: none;
+  float:left;
+  color: #999;
+  cursor: pointer;
+  font: 900 12px/20px "Arial", Helvetica, sans-serif;
+}
+
+#second-header ul li a span {
+  margin: 0 10px 0 -10px;
+  padding: 1px 8px 5px 18px;
+  position: relative; /*To fix IE6 problem (not displaying)*/
+  float:left;
+}
+
+
+/*BLUE*/
+#second-header ul.blue li a.current, ul.blue li a:hover {
+  background: url("../images/blue.png") no-repeat top right;
+  color: #0d5f83;
+}
+
+#second-header ul.blue li a.current span, ul.blue li a:hover span {
+  background: url("../images/blue.png") no-repeat top left;
+}
+
+
+
+#footer {
+  margin-top: 10px;
+  padding-top: 5px;
+  border-top: 1px solid #e7e7e7;
+}
+
+#footer table{
+  border:0;
+  width: 700px;
+}
+
+#footer td{
+  vertical-align: top;
+  border:0;
+}
+
+
+
+/* Buttons
+*/
+
+.btn {
+  display: inline-block;
+  background: -webkit-linear-gradient(top, rgba(40, 40, 40, 0.3), rgba(35, 35, 35, 0.3) 50%, rgba(10, 10, 10, 0.3) 50%, rgba(0, 0, 0, 0.3));
+  padding: 8px 18px;
+  border-radius: 50px;
+  border: 2px solid rgba(0, 0, 0, 0.7);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.7);
+  border-top: 2px solid rgba(0, 0, 0, 1);
+  color: rgba(255, 255, 255, 0.8);
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  font-size: 13px;
+  text-decoration: none;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.75);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.btn:hover {
+  background: -webkit-linear-gradient(top, rgba(40, 40, 40, 0.6), rgba(35, 35, 35, 0.6) 50%, rgba(10, 10, 10, 0.8) 50%, rgba(0, 0, 0, 0.8));
+}
+
+.btn .icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin: 1px 8px 0 0;
+  float: left;
+}
+
+.btn-github .icon {
+  opacity: 0.6;
+  background: url("../images/blacktocat.png") 0 0 no-repeat;
+}
+
+#downloads .btn {
+  display: inline-block;
+  text-align: center;
+  margin: 0;
+}
+
+
+table{
+  border-collapse: collapse;
+  border-spacing: 0;
+  border:1px solid #000000;
+}
+
+th{
+  border:1px solid #000000;
+}
+
+td{
+  border:1px solid #000000;
+  padding: 0px 10px;
+}
+
+

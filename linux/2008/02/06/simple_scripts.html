@@ -57,51 +57,43 @@
   </ul>
 </div>
 
-<h1>Linux Blog</h1>
+<h1>Simple Scripts</h1>
+
+<h3> lsof </h3>
+<p>Sometimes my system is in trouble with the high loadaverage of the web server because of the attack of some malicious IPs.<br />
+I have tried to look for a command to get the IPs which make this kind of trouble by looking into its pid.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">      lsof -nP -w -T -i tcp | grep httpd | grep &lt;PROCESS_ID_TO_CHECK&gt;</code></pre></figure>
+
+<h3> diff </h3>
+<p>Sometimes I want to find the diffs between my local file and remote file or between remote files. Here is a simple trick.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">      diff &lt;LOCAL_FILE &lt;<span class="o">(</span>ssh remote_host_1 cat REMOTE_FILE<span class="o">)</span>
+      diff &lt;<span class="o">(</span>ssh remote_host_1 cat REMOTE_FILE_1<span class="o">)</span>  &lt;<span class="o">(</span>ssh remote_host_2 cat REMOTE_FILE_2<span class="o">)</span></code></pre></figure>
+
+<p>(Note, where remote_host_1 and remote_host_2 should be setup with your ssh-key stuff and you should not need to put your password or passphrase. Unfortunately, this works only on bash)</p>
+
+<h3> dump and restore </h3>
+<p>dump and restore are a sysadmin’s friend. They really make it easy for sysadmin to handle the backup of a system. There may be some applications to replace the command dump and restore but I would like to be stuck with them untli I find something better than them.\ Do you know that we can simply dump the whole partition and restore it on the remote machine? So, we can migrate the whole system with a following simple script using dump and restore</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">      ssh remote_host<span class="o">(</span>_IP<span class="o">)</span> -n dump 0cf - / | restore xf -</code></pre></figure>
+
+<p>I found this tip when <a href="http://www.cs.indiana.edu/~shei">Bruce</a>, the CS sysadmins at IU, helped to migrate one of the very important servers of the OSL. I would like to give special thanks to Bruce.</p>
+
+<p><strong>Note</strong></p>
 
 <ul>
-  
-  <li>
-    <a href="/linux/2008/06/18/ssh_tunneling.html">SSH Tunneling</a>
-    <p>A Secure Shell (SSH) tunnel consists of an encrypted tunnel created through an SSH protocol connection. Users may set up SSH tunnels to transfer unencrypted traffic over a network through an encrypted channel.</p>
-  </li>
-  
-  <li>
-    <a href="/linux/2008/06/17/screen_shortcuts.html">Screen Shortcuts</a>
-    <p>Useful shortcuts of using a screen (full-screen window manager that multiplexes a physical terminal between several processes, typically interactive shells)</p>
-  </li>
-  
-  <li>
-    <a href="/linux/2008/04/29/install_oscar_on_ps3.html">Install OSCAR on PlayStation3</a>
-    <p>Research for expanding OSCAR's portability to Play Station 3 (PS3)</p>
-  </li>
-  
-  <li>
-    <a href="/linux/2008/02/22/setfacl.html">setfacl</a>
-    <p>Settiing up an ACL (Access Control List) in linux</p>
-  </li>
-  
-  <li>
-    <a href="/linux/2008/02/06/simple_scripts.html">Simple Scripts</a>
-    <p>I would like to share my simple scripts that I found useful while working for the Center for Research in Extreme Scale Technologies (CREST) as a System Administrator</p>
-  </li>
-  
-  <li>
-    <a href="/linux/2008/01/13/restore_grub.html">Restore grub</a>
-    <p>Preparing for the contingency plan - how to restore a grub</p>
-  </li>
-  
-  <li>
-    <a href="/linux/2007/07/31/backing-up-a-data-to-CD-R.html">Backing up a data to CD-R</a>
-    <p>One of the ways to back up data, CD-R</p>
-  </li>
-  
-  <li>
-    <a href="/linux/2007/04/09/getting_started_with_mysql.html">Getting started with MySQL</a>
-    <p>A very fundamental process to start up mysql</p>
-  </li>
-  
+  <li>The target machine where you want to migrate a system should be clean(or empty) to take the whole system of the remote machine assuming it has enough space to restore the dump file.</li>
+  <li>Reboot your target machine to go to a single-user mode. (e.g., I usually do with my linux installation CD)</li>
+  <li>Run the above script at the target machine.</li>
+  <li>Of course, the ssh-key stuff should be setup without having to put your password or passphrase.</li>
 </ul>
+
+<h3> Mount ISO file </h3>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">mount -o loop -t iso9660 file.iso /mnt/test</code></pre></figure>
+
+
 
 
 

@@ -52,56 +52,65 @@
 
 <div id="second-header">
   <ul class="blue">
-    <li><a href="/apple_blog" title="apple" class="" ><span>Apple</span></a></li>
-    <li><a href="/linux_blog" title="linux" class="current" ><span>Linux</span></a></li>
+    <li><a href="/apple_blog" title="apple" class="current" ><span>Apple</span></a></li>
+    <li><a href="/linux_blog" title="linux" class="" ><span>Linux</span></a></li>
   </ul>
 </div>
 
-<h1>Linux Blog</h1>
+<h1>Useful commands for OS X</h1>
 
 <ul>
-  
-  <li>
-    <a href="/linux/2008/06/18/ssh_tunneling.html">SSH Tunneling</a>
-    <p>A Secure Shell (SSH) tunnel consists of an encrypted tunnel created through an SSH protocol connection. Users may set up SSH tunnels to transfer unencrypted traffic over a network through an encrypted channel.</p>
-  </li>
-  
-  <li>
-    <a href="/linux/2008/06/17/screen_shortcuts.html">Screen Shortcuts</a>
-    <p>Useful shortcuts of using a screen (full-screen window manager that multiplexes a physical terminal between several processes, typically interactive shells)</p>
-  </li>
-  
-  <li>
-    <a href="/linux/2008/04/29/install_oscar_on_ps3.html">Install OSCAR on PlayStation3</a>
-    <p>Research for expanding OSCAR's portability to Play Station 3 (PS3)</p>
-  </li>
-  
-  <li>
-    <a href="/linux/2008/02/22/setfacl.html">setfacl</a>
-    <p>Settiing up an ACL (Access Control List) in linux</p>
-  </li>
-  
-  <li>
-    <a href="/linux/2008/02/06/simple_scripts.html">Simple Scripts</a>
-    <p>I would like to share my simple scripts that I found useful while working for the Center for Research in Extreme Scale Technologies (CREST) as a System Administrator</p>
-  </li>
-  
-  <li>
-    <a href="/linux/2008/01/13/restore_grub.html">Restore grub</a>
-    <p>Preparing for the contingency plan - how to restore a grub</p>
-  </li>
-  
-  <li>
-    <a href="/linux/2007/07/31/backing-up-a-data-to-CD-R.html">Backing up a data to CD-R</a>
-    <p>One of the ways to back up data, CD-R</p>
-  </li>
-  
-  <li>
-    <a href="/linux/2007/04/09/getting_started_with_mysql.html">Getting started with MySQL</a>
-    <p>A very fundamental process to start up mysql</p>
-  </li>
-  
+  <li><strong>ioreg</strong> shows I/O Kit registry. I usually use this to check the capacity of a battery in my powerbook</li>
 </ul>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">ioreg -p IODeviceTree -n <span class="s2">"battery"</span> -w 0 | grep IOBatteryInfo</code></pre></figure>
+
+<ul>
+  <li>If the above command does not work with the newer version of OSX, try to use the following instead:</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">pmset -g batt</code></pre></figure>
+
+<ul>
+  <li><strong>hdiutil</strong> manipulates disk images: I usually use this to merge several dmg files to one iso file.</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">hdiutil makehybrid -iso -o /path/to/make/your/iso/file.iso /directory/of/the/source/dmg/files/</code></pre></figure>
+
+<ul>
+  <li><strong>chflags</strong> change file flags: I usually use this to lock/unlock files with uchg/nouchg and do something else with some other flags (e.g., nodump, …). <br />
+  The option, nouchg clears the user immutable flag.</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sudo find . -flags uchg -exec chflags nouchg <span class="o">{}</span> <span class="se">\;</span>
+  or
+sudo chflags -R nouchg .</code></pre></figure>
+
+<ul>
+  <li><strong>fsaclctl</strong> controls the ACL on the specific path.</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">usage:  fsaclctl -p path | -a  <span class="o">[</span>-e <span class="nb">enable</span><span class="o">]</span> <span class="o">[</span>-d disable] <span class="o">[</span>-v]
+                -p              path to filesystem mount point
+                -a              operate on all relevant volumes
+                -e              <span class="nb">enable </span>access control lists on this filesystem
+                -d              disable access control lists on this filesystem
+                -v              print version</code></pre></figure>
+
+<ul>
+  <li><strong>system_profiler</strong> displays system information of OSX</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">system_profiler SPHardwareDataType SPNetworkDataType</code></pre></figure>
+
+<ul>
+  <li><strong>xattr</strong> setup the special attribute of files.
+  Under special circumstances, Mac OS X adds the extended attribute ‘com.apple.quarantine’ to a file which was e.g. downloaded from the internet. This can also happen to files within the BoxCryptor Folder. If an encrypted file has this extended attribute set, you receive the “is damaged” error message when trying to open the plaintext file in the BoxCryptor Volume.</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">xattr -r -d com.apple.quarantine /path/to/encfs/mount/point</code></pre></figure>
+
+
 
 
 
