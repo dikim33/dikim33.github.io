@@ -67,6 +67,7 @@ a:visited {
 /* Header */
 #header {
   width: 700px;
+  height: 185px;
   margin: 0 auto;
   border-bottom: 1px solid #e7e7e7;
 }
