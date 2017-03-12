@@ -51,5 +51,5 @@ folder: linux
   * Finish up the OSCAR installation
 
 
-For the updated instruction, please refer to the <a href="http://svn.oscar.openclustergroup.org/trac/oscar/wiki/OSCAR_on_PS3">wiki page</a> that I wrote on the OSCAR web site.
+For the updated instruction, please refer to the <a href="http://oscar-cluster.github.io/oscar/wiki/OSCAR_on_PS3">wiki page</a> that I wrote on the OSCAR web site.
 
